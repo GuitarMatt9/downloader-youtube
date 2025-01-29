@@ -1,5 +1,6 @@
 import os
 import yt_dlp
+import sys
 
 # Archivo donde se registrarán las descargas para evitar duplicados
 ARCHIVO_DESCARGAS = "descargas.txt"
@@ -54,5 +55,11 @@ def download_audio(url, output_folder="downloads"):
                     guardar_descarga(titulo)  # Guardar en el registro
 
 if __name__ == "__main__":
-    url = input("🎵 Dale culo roto pone el link o te fajo: ")
+    # Verifica si se pasó una URL como argumento al ejecutar el script
+    if len(sys.argv) < 2:
+        print("Por favor, proporciona una URL.")
+        sys.exit(1)  # Termina el script si no se proporciona la URL
+
+    url = sys.argv[1]  # Toma la URL proporcionada como primer argumento
+    print(f"Descargando desde {url}...")
     download_audio(url)
